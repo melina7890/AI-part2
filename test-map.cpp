@@ -25,6 +25,7 @@ void test_add() {
 
 void test_clear() {
   Map* map = new Map();
+  t_true(map->size() == 0);
   map->clear();
   t_true(map->size() == 0);
   map->add(one, s1);
