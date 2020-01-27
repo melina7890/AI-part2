@@ -13,7 +13,7 @@ class String : public Object {
 		// the hash value so as to not need to recalculate
 		size_t hash_;
 		// the size of this string
-		int size;
+		size_t size;
 		// The data for this string
 		char* str_;
 
@@ -98,6 +98,13 @@ class String : public Object {
 			strcpy(cstr, this->str_);
 			String* ret = new String(strcat(cstr, s->str_));
 			return ret;
+		}
+
+		/**
+		* Return the size of this string.
+		*/
+		size_t size() {
+			return this->size();
 		}
 
 };
