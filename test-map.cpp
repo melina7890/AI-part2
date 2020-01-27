@@ -1,6 +1,7 @@
 #include "object.h"
 #include "string.h"
 #include "map.h"
+#include "pair.h"
 
 void FAIL() {   exit(1);    }
 void t_true(bool p) { if (!p) FAIL(); }
@@ -111,6 +112,17 @@ void test_hash_and_equals() {
   t_true(map1->hash() == map2->hash());
 }
 
+void test_pair() {
+  Pair* p = new Pair(one, two);
+  t_true(p->o1->equals(one));
+  t_true(p->o2->equals(two));
+
+  p->o1 = two;
+  t_false(p->o1->equals(one));
+  t_true(p->o1->equals(two));
+  t_true(p->o2->equals(two));
+}
+
 int main() {
   test_add();
   test_clear();
@@ -120,5 +132,6 @@ int main() {
   test_pop();
   test_pop_item();
   test_hash_and_equals();
+  test_pair();
   return 0;
 }
