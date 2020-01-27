@@ -79,14 +79,6 @@ class Map : public Object {
     }
 
     /**
-    * Removes the last key-value pair
-    * @return the value of the element removed
-    */
-    Object* pop() {
-      return new Object();
-    }
-
-    /**
 		* Is this object equal to that object?
 		* @param o is the object to compare equality to.
 		* @return	whether this object is equal to that object.

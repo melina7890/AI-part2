@@ -73,14 +73,6 @@ void test_values() {
   t_true(map->values()[1]->equals(s2));
 }
 
-void test_pop() {
-  Map* map = new Map();
-  map->add(one, s1);
-  map->add(two, s2);
-  t_true(map->pop()->equals(s2));
-  t_true(map->pop()->equals(s1));
-}
-
 void test_pop_item() {
   Map* map = new Map();
   map->add(one, s1);
