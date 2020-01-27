@@ -29,6 +29,8 @@ void test_add() {
   map->add(not_one, s1);
   t_true(map->get(one)->equals(s1));
   t_true(map->size() == 1);
+
+  delete map;
 }
 
 void test_clear() {
@@ -41,6 +43,8 @@ void test_clear() {
   t_true(map->size() == 2);
   map->clear();
   t_true(map->size() == 0);
+
+  delete map;
 }
 
 void test_copy() {
@@ -55,6 +59,9 @@ void test_copy() {
   String* s3 = new String("Hi");
   map->add(one, s3);
   t_false(map2->get(one)->equals(s3));
+
+  delete map;
+  delete map2;
 }
 
 void test_keys() {
@@ -63,6 +70,8 @@ void test_keys() {
   map->add(two, s2);
   t_true(map->keys()[0]->equals(one));
   t_true(map->keys()[1]->equals(two));
+
+  delete map;
 }
 
 void test_values() {
@@ -71,6 +80,8 @@ void test_values() {
   map->add(two, s2);
   t_true(map->values()[0]->equals(s1));
   t_true(map->values()[1]->equals(s2));
+
+  delete map;
 }
 
 void test_pop_item() {
@@ -79,6 +90,8 @@ void test_pop_item() {
   map->add(two, s2);
   t_true(map->pop_item(one)->equals(s1));
   t_true(map->pop_item(two)->equals(s2));
+
+  delete map;
 }
 
 void test_hash_and_equals() {
@@ -102,6 +115,9 @@ void test_hash_and_equals() {
   t_true(map1->equals(map2));
   t_true(map2->equals(map1));
   t_true(map1->hash() == map2->hash());
+
+  delete map1;
+  delete map2;
 }
 
 void test_pair() {
@@ -113,6 +129,8 @@ void test_pair() {
   t_false(p->o1->equals(one));
   t_true(p->o1->equals(two));
   t_true(p->o2->equals(two));
+
+  delete p;
 }
 
 void test_map_delete() {
