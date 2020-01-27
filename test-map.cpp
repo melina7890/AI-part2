@@ -88,6 +88,29 @@ void test_pop_item() {
   t_true(map->pop_item(two)->equals(s2));
 }
 
+void test_hash_and_equals() {
+  Map* map1 = new Map();
+  Map* map2 = new Map();
+
+  t_true(map1->equals(map2));
+  t_true(map2->equals(map1));
+  t_true(map1->hash() == map2->hash());
+
+  map1->add(one, s1);
+  map1->add(two, s2);
+
+  t_false(map1->equals(map2));
+  t_false(map2->equals(map1));
+  t_false(map1->hash() == map2->hash());
+
+  map2->add(one, s1);
+  map2->add(two, s2);
+
+  t_true(map1->equals(map2));
+  t_true(map2->equals(map1));
+  t_true(map1->hash() == map2->hash());
+}
+
 int main() {
   test_add();
   test_clear();
@@ -96,5 +119,6 @@ int main() {
   test_values();
   test_pop();
   test_pop_item();
+  test_hash_and_equals();
   return 0;
 }
