@@ -27,7 +27,7 @@ void test_add() {
 
   // add/get overwrites with different objects
   map->add(not_one, s1);
-  t_true(map->get(one)->equals(s));
+  t_true(map->get(one)->equals(s1));
   t_true(map->size() == 1);
 }
 
