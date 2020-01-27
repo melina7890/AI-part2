@@ -8,6 +8,7 @@ void t_false(bool p) { if (p) FAIL(); }
 
 String* one = new String("1");
 String* two = new String("2");
+String* not_one = new String("1");
 String* s1 = new String("Hello");
 String* s2 = new String("World");
 
@@ -17,9 +18,15 @@ void test_add() {
   map->add(one, s1);
   t_true(map->size() == 1);
   t_true(map->get(one)->equals(s1));
+
   // the previous key value pair is overwritten
   map->add(one, s2);
   t_true(map->get(one)->equals(s2));
+  t_true(map->size() == 1);
+
+  // add/get overwrites with different objects
+  map->add(not_one, s1);
+  t_true(map->get(one)->equals(s));
   t_true(map->size() == 1);
 }
 
