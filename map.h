@@ -2,7 +2,10 @@
 #include "object.h"
 #include "pair.h"
 
-/* An object that represents a map to store keys and values*/
+/**
+* An object that represents a map to store keys and values.
+* Map does not own any objects passed to it.
+*/
 class Map : public Object {
 
   public:

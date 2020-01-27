@@ -115,6 +115,15 @@ void test_pair() {
   t_true(p->o2->equals(two));
 }
 
+void test_map_delete() {
+  Map * m = new Map();
+  m->add(one, s1);
+  delete m;
+
+  t_true(one->equals(one));
+  t_true(s1->equals(s1));
+}
+
 int main() {
   test_add();
   test_clear();
