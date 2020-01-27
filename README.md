@@ -1,7 +1,7 @@
 ## Assignment 1 Part 2
 ### What's included:
 
-#### An object.h file and a tring.h file
+#### An object.h file and a String.h file
 This is the same file as the one used for warm ups 1 through 3. We believed that
 this file was necessary because it is the parent class for all object classes
 such as the string class. Additionally, the assignment specified that it was necessary
@@ -25,8 +25,7 @@ It contains the following methods:
 2. This was a helpful method to have in our tests to check the functionality of our other methods.
 3. The method add() which allows one to put new key-value pair within the map.
 4. The method get() which given a key, returns the associated value.
-5. The method clear() removes all key-value pairs from within the map.
-6. This method is very useful in the case that the map needs to be emptied.
+5. The method clear() removes all key-value pairs from within the map. This method is very useful in the case that the map needs to be emptied.
 7. The method copy() returns a deep copy of the map.
 8. The method keys() returns all keys within the map.
 9. The method values() returns all values stored within the map.
