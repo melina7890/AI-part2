@@ -1,6 +1,7 @@
 #include "object.h"
 #include "string.h"
 #include "map.h"
+#include "pair.h"
 
 void FAIL() {   exit(1);    }
 void t_true(bool p) { if (!p) FAIL(); }
@@ -88,6 +89,40 @@ void test_pop_item() {
   t_true(map->pop_item(two)->equals(s2));
 }
 
+void test_hash_and_equals() {
+  Map* map1 = new Map();
+  Map* map2 = new Map();
+
+  t_true(map1->equals(map2));
+  t_true(map2->equals(map1));
+  t_true(map1->hash() == map2->hash());
+
+  map1->add(one, s1);
+  map1->add(two, s2);
+
+  t_false(map1->equals(map2));
+  t_false(map2->equals(map1));
+  t_false(map1->hash() == map2->hash());
+
+  map2->add(one, s1);
+  map2->add(two, s2);
+
+  t_true(map1->equals(map2));
+  t_true(map2->equals(map1));
+  t_true(map1->hash() == map2->hash());
+}
+
+void test_pair() {
+  Pair* p = new Pair(one, two);
+  t_true(p->o1->equals(one));
+  t_true(p->o2->equals(two));
+
+  p->o1 = two;
+  t_false(p->o1->equals(one));
+  t_true(p->o1->equals(two));
+  t_true(p->o2->equals(two));
+}
+
 int main() {
   test_add();
   test_clear();
@@ -96,5 +131,7 @@ int main() {
   test_values();
   test_pop();
   test_pop_item();
+  test_hash_and_equals();
+  test_pair();
   return 0;
 }
