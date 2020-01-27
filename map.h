@@ -4,20 +4,14 @@
 
 /* An object that represents a map to store keys and values*/
 class Map : public Object {
+  
   public:
 
-    /* the map to store keys and values */
-    Object* map_;
-
     /* The constructor*/
-    Map() {
-      this->map_ = new Object();
-    }
+    Map() { }
 
     /* The destructor*/
-    ~Map() {
-
-    }
+    ~Map() { }
 
     /**
     * Determines the number of items in the map
