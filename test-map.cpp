@@ -13,6 +13,21 @@ String* not_one = new String("1");
 String* s1 = new String("Hello");
 String* s2 = new String("World");
 
+/**
+* Does this array of object points have the object we are looking for?
+* @param ol the array of pointers
+* @param o the object to search for. 
+*/
+bool in(Objects** ol, Object* o) {
+  bool is_in = false;
+  int i = 0;
+  while (ol[i] != '\0') {
+      is_in = ol[i]->equals(o) || is_in;
+  }
+
+  return is_in;
+}
+
 void test_add() {
   Map* map = new Map();
   t_true(map->size() == 0);
@@ -68,9 +83,20 @@ void test_keys() {
   Map* map = new Map();
   map->add(one, s1);
   map->add(two, s2);
-  t_true(map->keys()[0]->equals(one));
-  t_true(map->keys()[1]->equals(two));
+  t_true(in(map->keys(), one));
+  t_true(in(map->keys(), two));
+  t_false(in(map->keys(), s1));
+  t_false(in(map->keys(), s2));
 
+  // show deleting from map-> doesn't do anything.
+  Object** tmp = map->keys();
+  tmp[0] = s1;
+  t_true(in(map->keys(), s1));
+  t_true(in(map->keys(), s2));
+  t_false(in(map->keys(), one));
+  t_false(in(map->keys(), two));
+
+  delete tmp;
   delete map;
 }
 
@@ -78,9 +104,20 @@ void test_values() {
   Map* map = new Map();
   map->add(one, s1);
   map->add(two, s2);
-  t_true(map->values()[0]->equals(s1));
-  t_true(map->values()[1]->equals(s2));
+  t_true(in(map->values(), s1));
+  t_true(in(map->values(), s2));
+  t_false(in(map->values(), one));
+  t_false(in(map->values(), two));
 
+  // show deleting from map->values doesn't do anything.
+  Object** tmp = map->values();
+  tmp[0] = one;
+  t_true(in(map->values(), s1));
+  t_true(in(map->values(), s2));
+  t_false(in(map->values(), one));
+  t_false(in(map->values(), two));
+
+  delete tmp;
   delete map;
 }
 

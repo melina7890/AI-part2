@@ -57,17 +57,16 @@ class Map : public Object {
     }
 
     /**
-    * Returns the Map's keys
-    *
+    * Returns the Map's keys.
     */
-    Object* keys() {
+    Object** keys() {
 
     }
 
     /**
     * Returns all the Map's values
     */
-    Object* values() {
+    Object** values() {
 
     }
 
