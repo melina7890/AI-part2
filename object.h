@@ -18,6 +18,7 @@ class Object {
 		* @return	whether this object is equal to that object.
 		*/
 		virtual bool equals(Object* o) {
+
 		}
 
 		/**
@@ -27,5 +28,11 @@ class Object {
 		virtual size_t hash() {
 
 		}
+
+		/**
+		* Calculate this object's hash (helper method).
+		* @return a natural number of a hash for this object.
+		*/
+		virtual size_t hash_me_() {}
 
 };
