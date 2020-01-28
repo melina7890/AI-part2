@@ -29,7 +29,7 @@ class Map : public Object {
     * @param key is the object to map the value to
     * @param value the object to add to the Map
     */
-    void add(Object key, Object value) {
+    void add(Object* key, Object* value) {
 
     }
 
@@ -53,7 +53,7 @@ class Map : public Object {
     * @param key the key to get the value from
     * @return the value associated with the key
     */
-    Object* get(Object key) {
+    Object* get(Object* key) {
       return new Object();
     }
 
@@ -77,7 +77,7 @@ class Map : public Object {
     * @param key the key
     * @return the value of the element removed
     */
-    Object* pop_item(Object key) {
+    Object* pop_item(Object* key) {
       return new Object();
     }
 

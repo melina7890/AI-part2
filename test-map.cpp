@@ -2,6 +2,7 @@
 #include "string.h"
 #include "map.h"
 #include "pair.h"
+#include <stdlib.h>
 
 void FAIL() {   exit(1);    }
 void t_true(bool p) { if (!p) FAIL(); }
@@ -148,7 +149,6 @@ int main() {
   test_copy();
   test_keys();
   test_values();
-  test_pop();
   test_pop_item();
   test_hash_and_equals();
   test_pair();
