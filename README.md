@@ -32,4 +32,4 @@ It contains the following methods:
 10. The method pop_item() which removes the key-value pair of the given key and returns the value.
 
 ### Important Notes
-Due to conflicting information brought up by Professors on Piazza, we have added a Pair class as a stub. Why? We wanted to support various implementations of the code, since there is no one correct way to implement things. We did this because of what Professor Vitek said: "You have to negotiate with the spec team, which classes to add, or which method signatures to change." 
+Due to conflicting information brought up by Professors on Piazza, we have added a Pair class as a stub, that has now been removed. We did this because of what Professor Vitek said: "You have to negotiate with the spec team, which classes to add, or which method signatures to change." It is not clear between providing classes for people to use, and what is an implementation detail. We have purged this information, any generic default return statements, and the string and object implementations, from the repo.
