@@ -46,6 +46,8 @@ void test_add() {
   t_true(map->get(one)->equals(s1));
   t_true(map->size() == 1);
 
+  std::cout << "done add\n";
+
   delete map;
 }
 
@@ -59,6 +61,8 @@ void test_clear() {
   t_true(map->size() == 2);
   map->clear();
   t_true(map->size() == 0);
+
+  std::cout << "done clear\n";
 
   delete map;
 }
@@ -75,6 +79,8 @@ void test_copy() {
   String* s3 = new String("Hi");
   map->add(one, s3);
   t_false(map2->get(one)->equals(s3));
+
+  std::cout << "done copy\n";
 
   delete map;
   delete map2;

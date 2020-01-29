@@ -1,8 +1,9 @@
+#pragma once
+
 #include "object.h"
 #include <string.h>
 #include <stddef.h>
 #include <iostream>
-#pragma once
 
 /**
 * Represents a string class standard in most libraries.
@@ -10,18 +11,25 @@
 class String : public Object {
 
 	public:
+
+		char *str_;
+		size_t size_;
+
 		/**
 		* Create a string and copy the contents of the given array.
 		* @param c is the character array to be copied and used.
 		*/
 		String(const char* c) {
-
+			this->size_ = strlen(c) - 1;
+			this->str_ = reinterpret_cast<char *>(malloc((sizeof(char) * (size_ + 1))));
+			strcpy(this->str_, c);
 		}
 
 		/**
 		* Delete this string and the character array associated with it.
 		*/
 		~String() {
+			delete str_;
 		}
 
 		/**
@@ -29,7 +37,12 @@ class String : public Object {
 		* @return an integer hash of this string.
 		*/
 		size_t hash() {
-
+			size_t result = 0;
+			for (int i = 0; i <= this->size(); i++) {
+				char c = *(this->str_ + i);
+				result += c << i;
+			}
+			return result;
 		}
 
 		/**
@@ -38,7 +51,11 @@ class String : public Object {
 		* @return a boolean determining if these two objects are the same.
 		*/
 		bool equals(Object* o) {
-
+			String *s = dynamic_cast<String *>(o);
+			if (s == nullptr) {
+				return false;  // object was not of type String
+			}
+			return this->compare(s) == 0;
 		}
 
 		/**
@@ -55,7 +72,7 @@ class String : public Object {
 		* they are the same, and greater than 0 if we are bigger.
 		*/
 		int compare(String* s) {
-
+			return strcmp(this->str_, s->str_);
 		}
 
 		/**
@@ -64,14 +81,25 @@ class String : public Object {
 		* @return a concatenated version of both strings.
 		*/
 		String* concat(String* s) {
-
+			if (s == nullptr) {
+				// Guard against other being nullptr. Just return copy of self
+				return new String(this->str_);
+			}
+			
+			size_t len_other = strlen(s->str_);
+			size_t len_this = strlen(this->str_);
+			size_t len = len_other + len_this;
+			char *n = reinterpret_cast<char *>(malloc((sizeof(char) * (len + 1))));
+			strcpy(n, this->str_);
+			strcat(n, s->str_);
+			return new String(n);
 		}
 
 		/**
 		* Return the size of this string.
 		*/
 		size_t size() {
-
+			return this->size_;
 		}
 
 };
