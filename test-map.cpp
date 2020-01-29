@@ -7,6 +7,7 @@ void FAIL() {   exit(1);    }
 void t_true(bool p) { if (!p) FAIL(); }
 void t_false(bool p) { if (p) FAIL(); }
 
+Object* o   = new Object();
 String* one = new String("1");
 String* two = new String("2");
 String* not_one = new String("1");
@@ -27,6 +28,15 @@ bool in(Object** ol, Object* o, size_t len) {
   }
 
   return is_in;
+}
+
+test objects() {
+  // make sure it works with regular objects...
+  Map* map = new Map();
+  t_true(map->size() == 0);
+  map->add(o, o);
+  t_true(map->size() == 1);
+  t_true(map->get(o)->equals(o));
 }
 
 void test_add() {
