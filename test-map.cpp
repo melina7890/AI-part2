@@ -30,7 +30,7 @@ bool in(Object** ol, Object* o, size_t len) {
   return is_in;
 }
 
-test objects() {
+void test_objects() {
   // make sure it works with regular objects...
   Map* map = new Map();
   t_true(map->size() == 0);
@@ -185,5 +185,6 @@ int main() {
   test_values();
   test_pop_item();
   test_hash_and_equals();
+  test_objects();
   return 0;
 }
