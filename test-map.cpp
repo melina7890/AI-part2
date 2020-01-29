@@ -98,10 +98,12 @@ void test_keys() {
   // show deleting from map-> doesn't do anything.
   Object** tmp = map->keys();
   tmp[0] = s1;
-  t_true(in(map->keys(), s1, 2));
-  t_true(in(map->keys(), s2, 2));
-  t_false(in(map->keys(), one, 2));
-  t_false(in(map->keys(), two, 2));
+  t_true(in(map->keys(), one, 2));
+  t_true(in(map->keys(), two, 2));
+  t_false(in(map->keys(), s1, 2));
+  t_false(in(map->keys(), s2, 2));
+
+  std::cout << "done keys\n";
 
   delete tmp;
   delete map;
@@ -124,6 +126,8 @@ void test_values() {
   t_false(in(map->values(), one, 2));
   t_false(in(map->values(), two, 2));
 
+  std::cout << "done values\n";
+
   delete tmp;
   delete map;
 }
@@ -134,6 +138,8 @@ void test_pop_item() {
   map->add(two, s2);
   t_true(map->pop_item(one)->equals(s1));
   t_true(map->pop_item(two)->equals(s2));
+
+  std::cout << "done pop item\n";
 
   delete map;
 }
@@ -159,6 +165,8 @@ void test_hash_and_equals() {
   t_true(map1->equals(map2));
   t_true(map2->equals(map1));
   t_true(map1->hash() == map2->hash());
+
+  std::cout << "done hash and equals\n";
 
   delete map1;
   delete map2;

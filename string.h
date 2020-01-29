@@ -1,6 +1,7 @@
 #pragma once
 
 #include "object.h"
+#include "helper.h"
 #include <string.h>
 #include <stddef.h>
 #include <iostream>
@@ -40,7 +41,7 @@ class String : public Object {
 			size_t result = 0;
 			for (int i = 0; i <= this->size(); i++) {
 				char c = *(this->str_ + i);
-				result += c << i;
+				result += rotl32c(c, i % 32);
 			}
 			return result;
 		}

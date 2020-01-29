@@ -1,5 +1,6 @@
 #pragma once
 
+#include "helper.h"
 #include "string.h"
 #include "object.h"
 
@@ -52,7 +53,6 @@ class Map : public Object {
       this->trash_size_ = 0;
       this->capacity_ = this->INITIAL_CAPACITY;
       this->storage_ = reinterpret_cast<MapItem**>(malloc(this->capacity_ * sizeof(void*)));
-      fprintf(stderr, "storage: %p\n", this->storage_);
       this->_init_storage();
     }
 
@@ -117,10 +117,25 @@ class Map : public Object {
           index = 0;
         }
         index++;
-        fprintf(stderr, "p: %p\n", item);
       } while (item != nullptr && (item->key == nullptr || item->key->hash() != hash));
-      fprintf(stderr, "index: %d\n", index-1);
       return index - 1;
+    }
+
+    MapItem *_item_for_index(size_t index) {
+      MapItem *item = *(this->storage_ + index);
+      if (item == nullptr) {
+        return nullptr;
+      }
+      return item;
+    }
+
+    void _trash_index(size_t index) {
+      MapItem **p = this->storage_ + index;
+      MapItem *item = *p;
+      if (item != nullptr) {
+        item->key = nullptr;
+        item->value = nullptr;
+      }
     }
 
     void _maintain_load() {
@@ -203,7 +218,7 @@ class Map : public Object {
     */
     Object* get(Object* key) {
       size_t index = this->_index_for_key(key);
-      MapItem *item = *(this->storage_ + index);
+      MapItem *item = this->_item_for_index(index);
       if (item == nullptr) {
         return nullptr;
       }
@@ -252,7 +267,17 @@ class Map : public Object {
     * @return the value of the element removed
     */
     Object* pop_item(Object* key) {
-      return nullptr;
+      size_t index = this->_index_for_key(key);
+      MapItem *item = this->_item_for_index(index);
+
+      Object *result = nullptr;
+      if (item != nullptr) {
+        result = item->value;
+      }
+      
+      this->_trash_index(index);
+      
+      return result;
     }
 
     /**
@@ -261,6 +286,27 @@ class Map : public Object {
 		* @return	whether this object is equal to that object.
 		*/
 		virtual bool equals(Object* o) {
+      // Check other Object is a Map
+      Map *other = dynamic_cast<Map*>(o);
+      if (other == nullptr) {
+        return false;
+      }
+
+      if (this->size() != other->size()) {
+        return false;
+      }
+
+      Object **keys = this->keys();
+
+      for (size_t i = 0; i < this->size(); i++) {
+        Object *key = *(keys + i);
+        Object *this_value = this->get(key);
+        Object *othr_value = other->get(key);
+        if (!this_value->equals(othr_value)) {
+          return false;
+        }
+      }
+      
       return true;
     }
 
@@ -269,7 +315,18 @@ class Map : public Object {
 		* @return a natural number of a hash for this object.
 		*/
 		virtual size_t hash() {
-      return 0;
+      size_t result = 0;
+
+      Object **keys = this->keys();
+
+      for (size_t i = 0; i < this->size(); i++) {
+        Object *key = *(keys + i);
+        Object *value = this->get(key);
+        result += rotl32c(key->hash(), i % 32);
+        result += rotl32c(value->hash(), i % 32);
+      }
+      
+      return result;
     }
 
 };
