@@ -21,7 +21,7 @@ String* s2 = new String("World");
 */
 bool in(Object** ol, Object* o, size_t len) {
   bool is_in = false;
-  int i = 0;
+  size_t i = 0;
   while (i != len) {
       is_in = ol[i]->equals(o) || is_in;
       i++;
@@ -94,20 +94,24 @@ void test_keys() {
   Map* map = new Map();
   map->add(one, s1);
   map->add(two, s2);
-  t_true(in(map->keys(), one, 2));
-  t_true(in(map->keys(), two, 2));
-  t_false(in(map->keys(), s1, 2));
-  t_false(in(map->keys(), s2, 2));
+  Object** keys = map->keys();
+  t_true(in(keys, one, 2));
+  t_true(in(keys, two, 2));
+  t_false(in(keys, s1, 2));
+  t_false(in(keys, s2, 2));
+  delete[] keys;
 
   // show deleting from map-> doesn't do anything.
   Object** tmp = map->keys();
   tmp[0] = s1;
-  t_true(in(map->keys(), s1, 2));
-  t_true(in(map->keys(), s2, 2));
-  t_false(in(map->keys(), one, 2));
-  t_false(in(map->keys(), two, 2));
+  Object** nkeys = map->keys();
+  t_true(in(nkeys, s1, 2));
+  t_true(in(nkeys, s2, 2));
+  t_false(in(nkeys, one, 2));
+  t_false(in(nkeys, two, 2));
 
-  delete tmp;
+  delete[] nkeys;
+  delete[] tmp;
   delete map;
 }
 
@@ -115,20 +119,25 @@ void test_values() {
   Map* map = new Map();
   map->add(one, s1);
   map->add(two, s2);
-  t_true(in(map->values(), s1, 2));
-  t_true(in(map->values(), s2, 2));
-  t_false(in(map->values(), one, 2));
-  t_false(in(map->values(), two, 2));
+  Objects** val = map->values();
+  t_true(in(val, s1, 2));
+  t_true(in(val, s2, 2));
+  t_false(in(val, one, 2));
+  t_false(in(val, two, 2));
+  delete[] val;
 
   // show deleting from map->values doesn't do anything.
   Object** tmp = map->values();
   tmp[0] = one;
-  t_true(in(map->values(), s1, 2));
-  t_true(in(map->values(), s2, 2));
-  t_false(in(map->values(), one, 2));
-  t_false(in(map->values(), two, 2));
+  Objects** nval = map->values();
 
-  delete tmp;
+  t_true(in(nval, s1, 2));
+  t_true(in(nval, s2, 2));
+  t_false(in(nval, one, 2));
+  t_false(in(nval, two, 2));
+
+  delete[] nval;
+  delete[] tmp;
   delete map;
 }
 
