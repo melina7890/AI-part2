@@ -105,10 +105,10 @@ void test_keys() {
   Object** tmp = map->keys();
   tmp[0] = s1;
   Object** nkeys = map->keys();
-  t_true(in(keys, one, 2));
-  t_true(in(keys, two, 2));
-  t_false(in(keys, s1, 2));
-  t_false(in(keys, s2, 2));
+  t_true(in(nkeys, one, 2));
+  t_true(in(nkeys, two, 2));
+  t_false(in(nkeys, s1, 2));
+  t_false(in(nkeys, s2, 2));
 
   delete[] nkeys;
   delete[] tmp;
