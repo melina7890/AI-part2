@@ -13,7 +13,7 @@ class Map : public Object {
     Map() { }
 
     /* The destructor*/
-    ~Map() { }
+    virtual ~Map() { }
 
     /**
     * Determines the number of items in the map

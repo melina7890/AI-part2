@@ -12,6 +12,9 @@ class Object {
 		Object() {
 		}
 
+		// destructor
+		virtual ~Object() {}
+
 		/**
 		* Is this object equal to that object?
 		* @param o is the object to compare equality to.
