@@ -105,10 +105,10 @@ void test_keys() {
   Object** tmp = map->keys();
   tmp[0] = s1;
   Object** nkeys = map->keys();
-  t_true(in(nkeys, s1, 2));
-  t_true(in(nkeys, s2, 2));
-  t_false(in(nkeys, one, 2));
-  t_false(in(nkeys, two, 2));
+  t_true(in(keys, one, 2));
+  t_true(in(keys, two, 2));
+  t_false(in(keys, s1, 2));
+  t_false(in(keys, s2, 2));
 
   delete[] nkeys;
   delete[] tmp;
@@ -119,7 +119,7 @@ void test_values() {
   Map* map = new Map();
   map->add(one, s1);
   map->add(two, s2);
-  Objects** val = map->values();
+  Object** val = map->values();
   t_true(in(val, s1, 2));
   t_true(in(val, s2, 2));
   t_false(in(val, one, 2));
@@ -129,7 +129,7 @@ void test_values() {
   // show deleting from map->values doesn't do anything.
   Object** tmp = map->values();
   tmp[0] = one;
-  Objects** nval = map->values();
+  Object** nval = map->values();
 
   t_true(in(nval, s1, 2));
   t_true(in(nval, s2, 2));
