@@ -26,7 +26,7 @@ It contains the following methods:
 3. The method add() which allows one to put new key-value pair within the map.
 4. The method get() which given a key, returns the associated value.
 5. The method clear() removes all key-value pairs from within the map. This method is very useful in the case that the map needs to be emptied.
-7. The method copy() returns a deep copy of the map.
+7. The method copy() returns a copy of the map.
 8. The method keys() returns all keys within the map.
 9. The method values() returns all values stored within the map.
 10. The method pop_item() which removes the key-value pair of the given key and returns the value.
