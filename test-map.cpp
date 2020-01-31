@@ -37,6 +37,8 @@ void test_objects() {
   map->add(o, o);
   t_true(map->size() == 1);
   t_true(map->get(o)->equals(o));
+
+  delete map;
 }
 
 void test_add() {
@@ -86,6 +88,7 @@ void test_copy() {
   map->add(one, s3);
   t_false(map2->get(one)->equals(s3));
 
+  delete s3;
   delete map;
   delete map2;
 }
